@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>This</th>
+            <th>That</th>
+            <th>The Other</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+
+	mysql_connect("localhost","root","");
+	mysql_select_db("bigboss");
+
+    $sql = $conn->prepare("select * from login where username = '$username' and password = '$password'") ; 
+    
+    $sql->execute() ;
+?>
+        <!--Use a while loop to make a table row for every DB row-->
+        <?php while( $row = $sql->fetch()) : ?>
+        <tr>
+            <!--Each table column is echoed in to a td cell-->
+            <td><?php echo $row['This']; ?></td>
+            <td><?php echo $row['That']; ?></td>
+            <td><?php echo $row['Other']; ?></td>
+        </tr>
+        <?php endwhile ?>
+    </tbody>
+</table>
+</body>
+</html>
